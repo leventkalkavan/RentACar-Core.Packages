@@ -13,3 +13,5 @@
 /Users/leventkalkavan/Desktop/Projeler/nArchitectureDemo/src/corePackages/Core.Packages/Core.Application/bin/Debug/net7.0/Core.Persistence.dll
 /Users/leventkalkavan/Desktop/Projeler/nArchitectureDemo/src/corePackages/Core.Packages/Core.Application/bin/Debug/net7.0/Core.Persistence.pdb
 /Users/leventkalkavan/Desktop/Projeler/nArchitectureDemo/src/corePackages/Core.Packages/Core.Application/obj/Debug/net7.0/Core.Application.csproj.CopyComplete
+/Users/leventkalkavan/Desktop/Projeler/nArchitectureDemo/src/corePackages/Core.Packages/Core.Application/bin/Debug/net7.0/Core.CrossCuttingConcerns.dll
+/Users/leventkalkavan/Desktop/Projeler/nArchitectureDemo/src/corePackages/Core.Packages/Core.Application/bin/Debug/net7.0/Core.CrossCuttingConcerns.pdb
