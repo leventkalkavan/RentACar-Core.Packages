@@ -1,17 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Core.CrossCuttingConcerns.Exceptions.Types;
 
-public class ValidationException:Exception
+public class ValidationException : Exception
 {
-    public IEnumerable<ValidationExceptionModel> Errors { get; }
-
     public ValidationException()
-        : base()
     {
         Errors = Array.Empty<ValidationExceptionModel>();
     }
@@ -34,10 +25,13 @@ public class ValidationException:Exception
         Errors = errors;
     }
 
+    public IEnumerable<ValidationExceptionModel> Errors { get; }
+
     private static string BuildErrorMessage(IEnumerable<ValidationExceptionModel> errors)
     {
-        IEnumerable<string> arr = errors.Select(
-            x => $"{Environment.NewLine} -- {x.Property}: {string.Join(Environment.NewLine, values: x.Errors ?? Array.Empty<string>())}"
+        var arr = errors.Select(
+            x =>
+                $"{Environment.NewLine} -- {x.Property}: {string.Join(Environment.NewLine, x.Errors ?? Array.Empty<string>())}"
         );
         return $"Validation failed: {string.Join(string.Empty, arr)}";
     }

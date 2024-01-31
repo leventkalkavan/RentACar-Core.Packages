@@ -1,11 +1,6 @@
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using FluentValidation;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ValidationException = Core.CrossCuttingConcerns.Exceptions.Types.ValidationException;
 
 namespace Core.Application.Pipelines.Validation;
@@ -20,7 +15,8 @@ public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
         _validators = validators;
     }
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
+        CancellationToken cancellationToken)
     {
         ValidationContext<object> context = new(request);
 
@@ -29,14 +25,15 @@ public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
             .SelectMany(result => result.Errors)
             .Where(failure => failure != null)
             .GroupBy(
-                keySelector: p => p.PropertyName,
-                resultSelector: (propertyName, errors) =>
-                    new ValidationExceptionModel { Property = propertyName, Errors = errors.Select(e=>e.ErrorMessage) }
+                p => p.PropertyName,
+                (propertyName, errors) =>
+                    new ValidationExceptionModel
+                        { Property = propertyName, Errors = errors.Select(e => e.ErrorMessage) }
             ).ToList();
 
-        if(errors.Any())
+        if (errors.Any())
             throw new ValidationException(errors);
-        TResponse response = await next();
+        var response = await next();
         return response;
     }
 }
